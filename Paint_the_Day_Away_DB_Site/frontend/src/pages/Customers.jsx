@@ -9,6 +9,7 @@ function Customers({backendURL}){
         try{
             const response = await fetch(backendURL + '/customers')
             const {customers} = await response.json()
+            console.log(customers)
 
             setCustomers(customers)
 
@@ -27,11 +28,10 @@ function Customers({backendURL}){
             <table>
                 <thead>
                     <tr>
-                        {customers.length > 0 && Object.keys(customers[0].map((header, index)=>
-                            <th key= {index}>{header}</th>
-                
-                         ))} 
-                        <th></th>
+                        {customers.length > 0 && Object.keys(customers[0]).map((key) => (
+                            <th>{key}</th>
+                        ))} 
+                        
                     </tr>
                 </thead>
                 <tbody>

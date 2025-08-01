@@ -4,8 +4,10 @@ function EntityRow({rowObject, backendURL, refreshPeople }){
             {Object.values(rowObject).map((value, index)=>
             (
                 <td key = {index}>{value}</td>
+                
 
             ))}
+            <th><button>Update</button><button>Delete</button></th>
         </tr>
         
     )

@@ -14,6 +14,7 @@ import Manufacturers from './pages/Manufacturers'
 // Define the backend port and URL for API requests
 const backendPort = 1923;  // Use the port you assigned to the backend server, this would normally go in a .env file
 const backendURL = `http://classwork.engr.oregonstate.edu:${backendPort}`;
+//const backendURL = `http://localhost:${backendPort}`;
 
 function App() {
   
@@ -28,6 +29,11 @@ function App() {
         <Navigation/>
         <Routes>
           <Route path = "/customers" element = {<Customers backendURL={backendURL}/>}></Route>
+          <Route path = "/manufacturers" element = {<Manufacturers backendURL={backendURL}/>}></Route>
+          <Route path = "/products" element = {<Products backendURL={backendURL}/>}></Route>
+          <Route path = "/productreceipts" element = {<ProductReceipts backendURL={backendURL}/>}></Route>
+          <Route path = "/receipts" element = {<Receipts backendURL={backendURL}/>}></Route>
+          <Route path = "/orders" element = {<Orders backendURL={backendURL}/>}></Route>
         </Routes>
         </main>
     </div>

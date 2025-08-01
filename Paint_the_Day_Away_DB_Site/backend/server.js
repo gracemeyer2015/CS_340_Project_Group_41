@@ -92,7 +92,89 @@ app.get('/manufacturers', async (req, res) => {
     
 });
 
+app.get('/orders', async (req, res) => {
+    try {
+        
+       
+        const query1 = `SELECT Orders.orderID, Orders.date, Orders.quantity, Products.Productname FROM Orders INNER JOIN Products ON Products.ProductID = Orders.ProductID;`
 
+
+        const [orders] = await db.query(query1);
+
+    
+        res.status(200).json({ orders });  // Send the results to the frontend
+
+    } catch (error) {
+        console.error("Error executing queries:", error);
+        // Send a generic error message to the browser
+        res.status(500).send("An error occurred while executing the database queries.");
+    }
+    
+});
+
+app.get('/products', async (req, res) => {
+    try {
+        
+       
+        const query1 = `SELECT Products.productID, Products.productName, Products.price, Products.sellPrice, Products.newProduct, Products.firstDateOrdered, Manufacturers.name from Products INNER JOIN Manufacturers WHERE Manufacturers.manufacturerID = Products.manufacturerID;;`
+
+
+        const [products] = await db.query(query1);
+
+    
+        res.status(200).json({ products });  // Send the results to the frontend
+
+    } catch (error) {
+        console.error("Error executing queries:", error);
+        // Send a generic error message to the browser
+        res.status(500).send("An error occurred while executing the database queries.");
+    }
+    
+});
+
+app.get('/productreceipts', async (req, res) => {
+    try {
+        
+       
+        const query1 = `SELECT ProductReceipts.productReceiptID, Products.productName, Receipts.dateTime, ProductReceipts.quantity FROM ProductReceipts
+INNER JOIN Products ON Products.productID = ProductReceipts.productID
+INNER JOIN Receipts ON Receipts.receiptID = ProductReceipts.receiptID;
+`
+
+
+        const [productreceipts] = await db.query(query1);
+
+    
+        res.status(200).json({ productreceipts });  // Send the results to the frontend
+
+    } catch (error) {
+        console.error("Error executing queries:", error);
+        // Send a generic error message to the browser
+        res.status(500).send("An error occurred while executing the database queries.");
+    }
+    
+});
+
+app.get('/receipts', async (req, res) => {
+    try {
+        
+       
+        const query1 = `SELECT Receipts.receiptID, Receipts.dateTime, Customers.firstName, Customers.lastName FROM Receipts Inner JOIN Customers WHERE Customers.customerID = Receipts.customerID;`
+
+
+        const [receipts] = await db.query(query1);
+        console.log(receipts);
+
+    
+        res.status(200).json({ receipts });  // Send the results to the frontend
+
+    } catch (error) {
+        console.error("Error executing queries:", error);
+        // Send a generic error message to the browser
+        res.status(500).send("An error occurred while executing the database queries.");
+    }
+    
+});
 
 app.listen(PORT, function () {
     console.log('Express started on http://classwork.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
